@@ -123,3 +123,8 @@ void speedControl()
 	digitalWrite(in4, LOW);
 }
 ~~~
+
+
+### Link to TinkerCAD implementation 
+
+[ControlMotorDriver](https://www.tinkercad.com/things/gVzCvAAqwtV-control-motor-driver-using-arduino-uno/editel)

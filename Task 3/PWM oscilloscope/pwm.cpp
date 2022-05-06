@@ -4,7 +4,7 @@ float Ton;
 float Toff=1000-Ton;
 void setup()
 {
- pinMode(8,OUTPUT); 
+ pinMode(9,OUTPUT); 
  Serial.begin(9600); 
   Serial.println("enter the voltage you want");
  while(Serial.available()==0){}
@@ -17,8 +17,8 @@ void setup()
 void loop()
 {
   
-  digitalWrite(8,HIGH);
+  digitalWrite(9,HIGH);
   delay(Ton);
-  digitalWrite(8,LOW);
+  digitalWrite(9,LOW);
   delay(Toff);
 }

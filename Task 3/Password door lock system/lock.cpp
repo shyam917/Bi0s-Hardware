@@ -35,14 +35,20 @@ void setup()
     lcd.begin(16, 2);
 }
 
+char pin[4];
+int x=0;
+int load=0;
+int start=0;
 void loop()
 {
-    if (currentposition == 0)
+    if (start == 0)
     {
         displayscreen();
+      start++;
     }
+  
     int l;
-    char code = keypad.getKey();
+    char code= keypad.getKey();
     if (code != NO_KEY)
     {
         lcd.clear();
@@ -51,30 +57,51 @@ void loop()
         lcd.setCursor(7, 1);
         lcd.print(" ");
         lcd.setCursor(7, 1);
-        for (l = 0; l <= currentposition; ++l)
-        {
+      
+      if(load==0){
+        lcd.print("*");
+        load++;
+      }else if(load==1){
+        lcd.print("**");
+        load++;
+      }else if(load==2){
+        lcd.print("***");
+        load++;
+      }else if(load==3){
+        lcd.print("****");
+        load++;
+        load=0;
+        start=0;
+      }
+        
+          
+          
+           keypress();
+        
 
-            lcd.print("*");
-            keypress();
+       
+    pin[x]=code;
+
+      if(x==3){
+
+         int flag=0;
+      
+      
+
+        for(int i=0;i<4;i++){
+            if(pin[i]!=password[i]) flag++;
         }
 
-        if (code == password[currentposition])
-        {
-            ++currentposition;
-            if (currentposition == 4)
-            {
-
-                unlockdoor();
-                currentposition = 0;
-            }
-        }
-
-        else
-        {
-            ++invalidcount;
+        if(flag==0){
+            unlockdoor();
+        }else{
             incorrect();
-            currentposition = 0;
         }
+        x=0;
+      }else{
+        x++;
+      }
+        
     }
     // LOOP ENDS!!!//
 }

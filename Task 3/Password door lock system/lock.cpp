@@ -36,19 +36,19 @@ void setup()
 }
 
 char pin[4];
-int x=0;
-int load=0;
-int start=0;
+int x = 0;
+int load = 0;
+int start = 0;
 void loop()
 {
     if (start == 0)
     {
         displayscreen();
-      start++;
+        start++;
     }
-  
+
     int l;
-    char code= keypad.getKey();
+    char code = keypad.getKey();
     if (code != NO_KEY)
     {
         lcd.clear();
@@ -57,51 +57,59 @@ void loop()
         lcd.setCursor(7, 1);
         lcd.print(" ");
         lcd.setCursor(7, 1);
-      
-      if(load==0){
-        lcd.print("*");
-        load++;
-      }else if(load==1){
-        lcd.print("**");
-        load++;
-      }else if(load==2){
-        lcd.print("***");
-        load++;
-      }else if(load==3){
-        lcd.print("****");
-        load++;
-        load=0;
-        start=0;
-      }
-        
-          
-          
-           keypress();
-        
 
-       
-    pin[x]=code;
-
-      if(x==3){
-
-         int flag=0;
-      
-      
-
-        for(int i=0;i<4;i++){
-            if(pin[i]!=password[i]) flag++;
+        if (load == 0)
+        {
+            lcd.print("*");
+            load++;
+        }
+        else if (load == 1)
+        {
+            lcd.print("**");
+            load++;
+        }
+        else if (load == 2)
+        {
+            lcd.print("***");
+            load++;
+        }
+        else if (load == 3)
+        {
+            lcd.print("****");
+            load++;
+            load = 0;
+            start = 0;
         }
 
-        if(flag==0){
-            unlockdoor();
-        }else{
-            incorrect();
+        keypress();
+
+        pin[x] = code;
+
+        if (x == 3)
+        {
+
+            int flag = 0;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (pin[i] != password[i])
+                    flag++;
+            }
+
+            if (flag == 0)
+            {
+                unlockdoor();
+            }
+            else
+            {
+                incorrect();
+            }
+            x = 0;
         }
-        x=0;
-      }else{
-        x++;
-      }
-        
+        else
+        {
+            x++;
+        }
     }
     // LOOP ENDS!!!//
 }
@@ -194,7 +202,7 @@ void clearscreen()
 void keypress()
 {
 
-    digitalWrite(buzz, HIGH);
+    digitalWrite(buzz, LOW);
     delay(50);
     digitalWrite(buzz, LOW);
 }
